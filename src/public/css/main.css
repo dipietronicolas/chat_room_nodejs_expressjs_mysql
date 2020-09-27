@@ -1,0 +1,9 @@
+#chat-card{
+    height: 40vh;
+}
+#chat{
+    overflow-y: auto;
+}
+.display-4{
+    font-size: xx-large;
+}
