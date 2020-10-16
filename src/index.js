@@ -1,8 +1,8 @@
-const express = require('express');
-const http = require('http');
-const socketio = require('socket.io');
-const path = require('path');
-const morgan = require('morgan');
+const express = require('express'),
+  http = require('http'),
+  socketio = require('socket.io'),
+  path = require('path'),
+  morgan = require('morgan');
 
 const app = express();
 const server = http.createServer(app);
@@ -23,6 +23,6 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(morgan('dev'));
 
 
-server.listen(app.get('port'), () =>{
-    console.log('escuchando el puerto ' + app.get('port'))
+server.listen(app.get('port'), () => {
+  console.log('escuchando el puerto ' + app.get('port'))
 })

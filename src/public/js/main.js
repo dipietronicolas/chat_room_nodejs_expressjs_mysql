@@ -11,25 +11,24 @@ window.onload = function wtd() {
   const chat_username = document.getElementById('chat-username');
   const username_error = document.getElementById('username-error');
 
-  const login = document.getElementById('login');
-  const chat_room = document.getElementById('chat-room');
+  // Users
   const users = document.getElementById('users');
 
   // DELETE button
   const delete_button = document.querySelector('#delete_button');
 
-  chat_room.style.display = "none";
   username_error.style.display = "none";
-  chat_username.style.display = "none";
 
   login_form.addEventListener('submit', e => {
     e.preventDefault();
+    console.log(users); 
     socket.emit('new user', username.value, data => {
       if (data) {
-        login.style.display = "none";
-        chat_room.style.display = "";
+        $('#login').addClass('d-none');
+        $('#chat-room').removeClass('d-none');
+        $('#chat-username').removeClass('d-none');
+        $('#delete_button').removeClass('d-none');
         chat_username.textContent = username.value;
-        chat_username.style.display = "";
         message_box.focus();
       } else {
         username_error.style.display = "";
@@ -40,8 +39,7 @@ window.onload = function wtd() {
   // DELETE button
   delete_button.addEventListener('click', e => {
     //e.preventDefault();
-    socket.emit('delete_messages', () =>{
-    })
+    socket.emit('delete_messages');
   })
 
   // Hola esto es un comentario.
@@ -60,7 +58,7 @@ window.onload = function wtd() {
   socket.on('usernames', data => {
     let html = '';
     for (let i = 0; i < data.length; i++) {
-      html += '<i class="fas fa-user mt-1"/>&nbsp;' + data[i] + '<br/>'
+      html += '<i class="fas fa-user mt-1"/>&nbsp;' + data[i] + '</i><br/>'
     }
     users.innerHTML = html;
   });
