@@ -3,6 +3,9 @@ const express = require('express'),
   socketio = require('socket.io'),
   path = require('path'),
   morgan = require('morgan');
+  
+// Dotenv para guardar keys y no hardcodear datos importantes.
+require('dotenv').config()
 
 const app = express();
 const server = http.createServer(app);

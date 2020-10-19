@@ -5,21 +5,22 @@ const dbConnection = require('./database/dbConnection');
 const messageService = {};
 
 messageService.refreshChat = (io) => {
+  
   const connection = dbConnection();
   connection.query(`SELECT * FROM chat_room`, (err, data) => {
-    io.sockets.emit('chats', data);
+    io.sockets.emit('chats', data)
   })
   connection.end();
 };
 
 messageService.insertChat = (username, msg) => {
-  connection = dbConnection();
+  const connection = dbConnection();
   connection.query(`INSERT INTO chat_room (username, chat) VALUES ('${username}', '${msg}')`);
   connection.end();
 }
 
 messageService.deleteChat = () => {
-  connection = dbConnection();
+  const connection = dbConnection();
   connection.query(`DELETE FROM chat_room`);
   connection.end();
 }

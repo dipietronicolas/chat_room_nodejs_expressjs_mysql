@@ -49,15 +49,41 @@ module.exports = function (io) {
 
     function updateChat() {
       // Actualizo el chat
-      messageService.refreshChat(io);
+      try {
+        messageService.refreshChat(io);  
+      } catch (error) {
+        console.log(`error: ${error}`);
+      }
     }
 
     function insertChat(username, msg) {
-      messageService.insertChat(username, msg);
+      try {
+        messageService.insertChat(username, msg);
+      } catch (error) {
+        console.log(`
+          Error al insertar en base de datos: ${error}
+        `);
+      }
+      
     }
 
     function deleteChat() {
-      messageService.deleteChat();
+      try {
+        messageService.deleteChat();  
+      } catch (error) {
+        console.log(`
+          Error al Borrar mensajes de base de datos: ${error}
+        `);
+      }
+      
     }
+
+    // Errores
+    socket.on('chat error', err =>{
+      console.log(`hay un error`);
+    })
+
   });
+
+  
 }

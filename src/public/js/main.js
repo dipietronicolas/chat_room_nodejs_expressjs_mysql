@@ -20,8 +20,7 @@ window.onload = function wtd() {
   username_error.style.display = "none";
 
   login_form.addEventListener('submit', e => {
-    e.preventDefault();
-    console.log(users); 
+    e.preventDefault(); 
     socket.emit('new user', username.value, data => {
       if (data) {
         $('#login').addClass('d-none');
@@ -62,6 +61,8 @@ window.onload = function wtd() {
     }
     users.innerHTML = html;
   });
+
+  
 
   socket.on('chats', data => {
     $('#chat').html('');
